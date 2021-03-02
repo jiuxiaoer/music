@@ -6,7 +6,6 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/music.css">
-    <link rel="stylesheet" href="css/iconfont.css">
     <style>
         .item-1 {
             flex-grow: 1;
@@ -112,6 +111,71 @@
             border-radius: 0 10px 10px 0;
         }
 
+        #JiuXiaoMusicPlayer > #MusicList {
+            overflow: hidden;
+            height: 0;
+            transition: all 400ms ease-out;
+        }
+
+        #JiuXiaoMusicPlayer > #MusicList > #MusicListName {
+            font-size: 15px;
+            font-weight: bold;
+            padding: 5px;
+            color: white;
+            border-bottom: 1.5px solid rgba(255, 255, 255, 0.5);
+        }
+
+        #JiuXiaoMusicPlayer > #MusicList #Musiclists {
+            height: 250px;
+            overflow: auto;
+            overflow-y: scroll;
+            overflow-x: hidden;
+        }
+
+        #JiuXiaoMusicPlayer > #MusicList #Musiclists::-webkit-scrollbar {
+            width: 5px;
+            height: 4px;
+            scrollbar-arrow-color: red;
+        }
+
+        #JiuXiaoMusicPlayer > #MusicList #Musiclists::-webkit-scrollbar-thumb {
+            border-radius: 5px;
+            -webkit-box-shadow: inset 0 0 5px rgba(180, 180, 180, 0.2);
+            background: rgba(0, 0, 0, 0.2);
+            scrollbar-arrow-color: red;
+        }
+
+        #JiuXiaoMusicPlayer > #MusicList #Musiclists::-webkit-scrollbar-track {
+            -webkit-box-shadow: inset 0 0 5px rgba(195, 195, 195, 0.2);
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        #JiuXiaoMusicPlayer > #MusicList #Musiclists #SongSheets {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            outline: 0;
+            font-size: 100%;
+            vertical-align: baseline;
+            background: transparent;
+        }
+
+        #JiuXiaoMusicPlayer > #MusicList #Musiclists #SongSheets li {
+            line-height: 27px;
+            padding-left: 10px;
+            font-size: 12px;
+            border-bottom: 1px solid #676768;
+            color: #fff;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            transition: all 300ms ease-out;
+            cursor: pointer;
+        }
+
+        #JiuXiaoMusicPlayer > #MusicList #Musiclists #SongSheets li:hover {
+            background-color: rgba(25, 25, 25, 0.3);
+        }
+
         #JiuXiaoMusic #Musiclyric {
             z-index: 999999999;
             position: fixed;
@@ -149,6 +213,25 @@
             justify-content: center;
         }
 
+        #JiuXiaoMusic #Musiclyric #LyricsList .txt {
+            animation: shake 1.2s;
+        }
+
+        @keyframes shake {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            50% {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
         #JiuXiaoMusicPlayer .center {
             line-height: normal;
             margin: 0 auto;
@@ -159,6 +242,7 @@
         }
 
         #JiuXiaoMusicPlayer > #MusicLogo {
+            margin-top: 5%;
             width: 100%;
             height: 100%;
         }
@@ -176,7 +260,7 @@
         #JiuXiaoMusicPlayer > #MusicInfo {
             width: 100%;
             position: absolute;
-            top: 0;
+            top: 2px;
             z-index: -1;
             font-size: 10px;
         }
@@ -235,9 +319,15 @@
         }
 
         #JiuXiaoMusicPlayer > #MusicInfo div {
+            overflow: hidden !important;
+            text-overflow: ellipsis !important;
             font-weight: 600;
         }
-
+        #JiuXiaoMusicPlayer > #MusicInfo div span{
+            white-space:nowrap;
+            overflow:hidden;
+            text-overflow:ellipsis;
+        }
         #JiuXiaoMusicPlayer > #MusicBtn #hiden {
             position: absolute;
             font-size: 20px;
@@ -281,8 +371,8 @@
         }
 
         #JiuXiaoMusicPlayer > #MusicInfo .info {
-            line-height: 30px;
-            height: 30px;
+            line-height: 35px;
+            height: 35px;
         }
 
         #JiuXiaoMusicPlayer > #MusicProgress #volume {
@@ -298,7 +388,7 @@
             width: 20px;
             height: 110px;
             background-color: rgba(189, 189, 189, 0.8);
-            top: 20px;
+            top: 35px;
             left: 3.5px;
             border-radius: 5px 5px 0px 0px;
         }
@@ -387,14 +477,14 @@
         }
 
     </style>
-    <title>Document</title>
+    <title>JiuXiaoMusic</title>
 </head>
 <body>
 <div id="JiuXiaoMusic">
     <div id="JiuXiaoMusicPlayer" class="open">
         <div id="MusicMain">
             <div id="MainBackGround"
-                 style='background-image: url("https://cdn.jsdelivr.net/gh/Miaobai-max/tu/e3f4db2b10e37098fec3c4846ba2a538.png");'></div>
+                 style='background-image: url("http://p2.music.126.net/jOrfzq4tB9ENWQVWLhi3Ag==/109951165591010361.jpg?param=300x300");'></div>
         </div>
         <div id="MusicLogo">
             <div id="Logo"
@@ -406,12 +496,12 @@
         <div id="MusicInfo">
             <div class="JiuXiaoRow info">
                 <div class="item-1 rotate">
-                    <i class="iconfont icon-customer-service"></i>
+                    <i class="iconfont icon-bx-music"></i>
                     <span id="SongName">加载中...</span>
                 </div>
 
                 <div class="item-1 right">
-                    <i class="iconfont icon-yanchu"></i>
+                    <i class="iconfont icon-bx-time-five"></i>
                     <span id="CurrentTime">0:00</span>
                     <span>/</span>
                     <span id="EndTime">0:00</span>
@@ -443,12 +533,12 @@
         <div id="MusicConsole">
             <div class="JiuXiaoRow">
                 <div class="item-1">
-                    <span class="iconfont icon-icon-test1"></span>
-                    <span class="iconfont icon-backward"></span>
+                    <span class="iconfont icon-icon-test1" onclick="JiuXiaoMusic.Player.First()"></span>
+                    <span class="iconfont icon-backward" onclick="JiuXiaoMusic.Player.Last()"></span>
                 </div>
                 <div class="item-1 right">
-                    <span class="iconfont icon-forward"></span>
-                    <span class="iconfont icon-icon-test2"></span>
+                    <span class="iconfont icon-forward" onclick="JiuXiaoMusic.Player.Next()"></span>
+                    <span class="iconfont icon-icon-test2" onclick="JiuXiaoMusic.Player.LastOne()"></span>
                 </div>
             </div>
         </div>
@@ -477,20 +567,30 @@
                 </div>
                 <div class="item-1 right">
                     <span id="LyricSwitch" onclick="JiuXiaoMusic.lyric.Toggle()"
-                          class="iconfont icon-notification-filling"></span>
-                    <span id="SetUp" class="iconfont icon-set"></span>
+                          class="iconfont icon-kaiguan" style="font-size: 15px"></span>
+                    <span id="SetUp" onclick="JiuXiaoMusic.List.Toggle()" class="iconfont icon-set"></span>
                 </div>
             </div>
         </div>
         <div id="MusicBtn" onclick="JiuXiaoMusic.PlayerStatu.Toggle()">
             <i class="iconfont rovate-180" id="hiden">&#xe74d;</i>
         </div>
+        <div id="MusicList">
+            <div id="MusicListName">
+                <i style="font-size: 15px" class="iconfont icon-yanchu"></i>
+                JiuXiaoMusic
+            </div>
+            <div id="Musiclists">
+                <ul id="SongSheets">
+                </ul>
+            </div>
+        </div>
     </div>
     <div id="MusicTips" class="close">0:000</div>
     <div class="MusicF">
         <div id="Musiclyric" class="close">
             <div class="item-1" id="LyricsList">
-                <span>歌词解析中</span>
+                <span class="txt">歌词解析中</span>
             </div>
         </div>
     </div>
@@ -504,6 +604,9 @@
     var JiuXiaoMusic = {
         Ele: document.getElementById("JiuXiaoMusicPlayer"),
         Audio: document.createElement("audio"),
+        NewMusic: null,
+        Newlyric: null,
+        Musicdata: null,
         Player: {
             Ele: document.getElementById("play"),
             Statu: function () {
@@ -545,6 +648,54 @@
                 } else {
                     this.Open();
                 }
+            },
+            Init: function (data, flog = false) {
+                JiuXiaoMusic.Newlyric = JiuXiaoMusic.lyric.Init(data.lrc)
+                document.getElementById("SongName").innerText = data.title
+                document.getElementById("author").innerText = data.author
+                document.getElementById("album").innerText = data.title
+                document.getElementById("Logo").style.backgroundImage = "url(" + data.pic + ")"
+                // document.getElementById("MainBackGround").style.backgroundImage = "url(" + data.pic + ")"
+                JiuXiaoMusic.NewMusic = JiuXiaoMusic.getMusicDataIndex(data)
+                console.log(JiuXiaoMusic.NewMusic)
+                JiuXiaoMusic.Audio.src = data.url
+                if (flog) {
+                    JiuXiaoMusic.Player.Close()
+                    return
+                }
+                JiuXiaoMusic.Player.Open()
+            },
+            Last: function () {
+                if (JiuXiaoMusic.NewMusic == 0) {
+                    JiuXiaoMusic.Player
+                        .Init(JiuXiaoMusic.Musicdata.data[JiuXiaoMusic.Musicdata.data.length - 1])
+                    return;
+                } else if (JiuXiaoMusic.NewMusic == JiuXiaoMusic.Musicdata.data.length - 1) {
+                    JiuXiaoMusic.Player
+                        .Init(JiuXiaoMusic.Musicdata.data[0])
+                    return;
+                }
+                JiuXiaoMusic.NewMusic++
+                JiuXiaoMusic.Player.Init(JiuXiaoMusic.Musicdata.data[JiuXiaoMusic.NewMusic])
+
+            },
+            Next: function () {
+                if (JiuXiaoMusic.NewMusic == 0) {
+                    JiuXiaoMusic.Player
+                        .Init(JiuXiaoMusic.Musicdata.data[JiuXiaoMusic.Musicdata.data.length - 1])
+                    return
+                }
+                JiuXiaoMusic.NewMusic--
+                console.log(JiuXiaoMusic.NewMusic)
+                JiuXiaoMusic.Player.Init(JiuXiaoMusic.Musicdata.data[JiuXiaoMusic.NewMusic])
+            },
+            LastOne: function () {
+                JiuXiaoMusic.Player
+                    .Init(JiuXiaoMusic.Musicdata.data[JiuXiaoMusic.Musicdata.data.length - 1])
+            },
+            First: function () {
+                JiuXiaoMusic.Player
+                    .Init(JiuXiaoMusic.Musicdata.data[0])
             }
         },
         PlayerStatu: {
@@ -621,8 +772,27 @@
             },
             change: function (s, lyric) {
                 var txt = lyric[s]
-                if (txt != undefined) {
-                    document.getElementById("LyricsList").innerHTML = txt
+                if (txt != undefined&&document.getElementsByClassName("txt")[0].innerHTML!=txt) {
+                    document.getElementById("LyricsList").innerHTML = "<span class=\"txt\">" + txt + "</span>"
+                }
+            }
+        },
+        List: {
+            Ele: document.getElementById("MusicList"),
+            Statu: function () {
+                return parseInt(this.Ele.offsetHeight) > 0;
+            },
+            Open: function () {
+                this.Ele.style.height = "285px";
+            },
+            Close: function () {
+                this.Ele.style.height = "0px";
+            },
+            Toggle: function () {
+                if (this.Statu()) {
+                    this.Close();
+                } else {
+                    this.Open();
                 }
             }
         },
@@ -693,6 +863,15 @@
                 }
             }
         },
+        getMusicDataIndex: function (obj) {
+            var i = JiuXiaoMusic.Musicdata.data.length;
+            while (i--) {
+                if (JiuXiaoMusic.Musicdata.data[i] === obj) {
+                    return i;
+                }
+            }
+            return -1;
+        },
         Init: function () {
             var TotalTime;
             var left = 0;
@@ -700,12 +879,11 @@
             let progressEle = document.getElementById("progress");
             let timebtn = document.getElementById("timebtn");
             let panelBtn = document.getElementById("panel-btn")
-            var lyric;
             JiuXiaoMusic.ajax({
                 url: "https://www.79xj.cn/music/api.php",
                 type: 'post',
                 data: {
-                    input: '耗尽',
+                    input: '踏山河',
                     filter: 'name',
                     type: "netease",
                     page: "1"
@@ -715,16 +893,11 @@
                 contentType: "application/json",
                 success: function (data) {
                     data = eval("(" + data + ")");
+                    JiuXiaoMusic.Musicdata = data
+                    List(JiuXiaoMusic.Musicdata)
                     data = data.data[0]
-                    console.log((data.lrc))
-                    lyric = JiuXiaoMusic.lyric.Init(data.lrc)
+                    JiuXiaoMusic.Player.Init(data, true)
                     JiuXiaoMusic.PlayerStatu.Close()
-                    document.getElementById("SongName").innerText = data.title
-                    document.getElementById("author").innerText = data.author
-                    document.getElementById("album").innerText = data.title
-                    document.getElementById("Logo").style.backgroundImage = "url(" + data.pic + ")"
-                    document.getElementById("MainBackGround").style.backgroundImage = "url(" + data.pic + ")"
-                    JiuXiaoMusic.Audio.src = data.url
                 },
                 //异常处理
                 error: function (e) {
@@ -842,18 +1015,33 @@
                 console.log("当前的时间：" + NewTime);
                 // console.log("进度条进度：" + left);
                 CurrentTime = JiuXiaoMusic.getTimeString(NewTime);
-                JiuXiaoMusic.lyric.change(NewTime, lyric)
+                JiuXiaoMusic.lyric.change(NewTime, JiuXiaoMusic.Newlyric)
                 document.getElementById("CurrentTime").innerText = CurrentTime;
                 document.getElementById("timebtn").style.left = left + "px";
                 document.getElementById("progressColor").style.width = left + "px";
                 if (CurrentTime == EndTime) {
-                    JiuXiaoMusic.Player.Close()
+                    JiuXiaoMusic.Player.Next()
                 }
             });
-            JiuXiaoMusic.Audio.addEventListener('timeupdate', function () {
-                let NewTime = Math.floor(JiuXiaoMusic.Audio.currentTime * 1000);
-                console.log(NewTime)
-            }, false);
+
+            function List(data) {
+                for (let i = 0; i < data.data.length; i++) {
+                    let elm = document.createElement("li")
+                    elm.innerText = data.data[i].title
+                    elm.setAttribute("songid", data.data[i].songid)
+                    elm.onclick = function () {
+                        for (let i = 0; i < JiuXiaoMusic.Musicdata.data.length; i++) {
+                            if (JiuXiaoMusic.Musicdata.data[i].songid == this.getAttribute("songid")) {
+                                JiuXiaoMusic.Player.Init(JiuXiaoMusic.Musicdata.data[i])
+                                break
+                            }
+                        }
+                    }
+                    document.getElementById("SongSheets").appendChild(elm)
+                }
+            }
+
+
         }
     }
 </script>
