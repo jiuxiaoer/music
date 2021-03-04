@@ -323,11 +323,11 @@
             text-overflow: ellipsis !important;
             font-weight: 600;
         }
-        #JiuXiaoMusicPlayer > #MusicInfo div span{
-            white-space:nowrap;
-            overflow:hidden;
-            text-overflow:ellipsis;
+
+        #JiuXiaoMusicPlayer > #MusicInfo div span {
+
         }
+
         #JiuXiaoMusicPlayer > #MusicBtn #hiden {
             position: absolute;
             font-size: 20px;
@@ -488,8 +488,8 @@
         </div>
         <div id="MusicLogo">
             <div id="Logo"
-                 style='background-image: url("https://q1.qlogo.cn/g?b=qq&nk=2648919293&s=100");'>
-                <span class="center iconfont icon-play MusicOff" onclick="JiuXiaoMusic.Player.Toggle()"
+                 style='background-image: url("https://q1.qlogo.cn/g?b=qq&nk=1247333542&s=100");'>
+                <span class="center iconfont icon-play MusicOff" onclick="JiuXiaoMusic.Player.Prohibit()"
                       id="play"></span>
             </div>
         </div>
@@ -567,7 +567,7 @@
                 </div>
                 <div class="item-1 right">
                     <span id="LyricSwitch" onclick="JiuXiaoMusic.lyric.Toggle()"
-                          class="iconfont icon-kaiguan" style="font-size: 15px"></span>
+                          class="iconfont icon-bx-toggle-right"></span>
                     <span id="SetUp" onclick="JiuXiaoMusic.List.Toggle()" class="iconfont icon-set"></span>
                 </div>
             </div>
@@ -655,6 +655,7 @@
                 document.getElementById("author").innerText = data.author
                 document.getElementById("album").innerText = data.title
                 document.getElementById("Logo").style.backgroundImage = "url(" + data.pic + ")"
+                document.getElementById("play").setAttribute("onclick","JiuXiaoMusic.Player.Toggle()")
                 // document.getElementById("MainBackGround").style.backgroundImage = "url(" + data.pic + ")"
                 JiuXiaoMusic.NewMusic = JiuXiaoMusic.getMusicDataIndex(data)
                 console.log(JiuXiaoMusic.NewMusic)
@@ -696,6 +697,9 @@
             First: function () {
                 JiuXiaoMusic.Player
                     .Init(JiuXiaoMusic.Musicdata.data[0])
+            },
+            Prohibit:function () {
+                JiuXiaoMusic.Player.Tips("初始化中！~~~禁止播放~~~~")
             }
         },
         PlayerStatu: {
@@ -731,6 +735,8 @@
                 this.Ele.classList.add("open");
                 JiuXiaoMusic.Player.Tips("歌词开启")
                 document.getElementById("lyric").innerText = "歌词开启"
+                document.getElementById("LyricSwitch").classList.remove("icon-bx-toggle-right");
+                document.getElementById("LyricSwitch").classList.add("icon-bx-toggle-left");
                 let e = document.getElementsByClassName("icon-weixuanzhong")[0]
                 e.classList.remove("icon-weixuanzhong");
                 e.classList.add("icon-chenggong");
@@ -740,6 +746,8 @@
                 this.Ele.classList.add("close");
                 JiuXiaoMusic.Player.Tips("歌词关闭")
                 document.getElementById("lyric").innerText = "歌词关闭"
+                document.getElementById("LyricSwitch").classList.remove("icon-bx-toggle-left");
+                document.getElementById("LyricSwitch").classList.add("icon-bx-toggle-right");
                 let e = document.getElementsByClassName("icon-chenggong")[0]
                 e.classList.remove("icon-chenggong");
                 e.classList.add("icon-weixuanzhong");
@@ -772,7 +780,7 @@
             },
             change: function (s, lyric) {
                 var txt = lyric[s]
-                if (txt != undefined&&document.getElementsByClassName("txt")[0].innerHTML!=txt) {
+                if (txt != undefined && document.getElementsByClassName("txt")[0].innerHTML != txt) {
                     document.getElementById("LyricsList").innerHTML = "<span class=\"txt\">" + txt + "</span>"
                 }
             }
@@ -969,6 +977,7 @@
                         document.ontouchend = null; //弹起鼠标不做任何操作
                     }
                 }
+                //音量 pc
                 panelBtn.onmousedown = function (event) {
                     var TopVal = event.clientY;
                     var volume = JiuXiaoMusic.Audio.volume * 100
@@ -987,7 +996,7 @@
                         document.onmousemove = null; //弹起鼠标不做任何操作
                     }
                 }
-
+                //音量 手机
                 panelBtn.ontouchstart = function (event) {
                     var TopVal = event.targetTouches[0].clientY;
                     var volume = JiuXiaoMusic.Audio.volume * 100
@@ -1023,7 +1032,6 @@
                     JiuXiaoMusic.Player.Next()
                 }
             });
-
             function List(data) {
                 for (let i = 0; i < data.data.length; i++) {
                     let elm = document.createElement("li")
